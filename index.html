@@ -10,7 +10,13 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">🌸 Sakura Linux</div>
-    <button id="modeToggle">🌙</button>
+    <div class="auth" id="authBtns">
+      <button id="signInBtn">Sign In</button>
+      <button id="signUpBtn">Sign Up</button>
+    </div>
+    <div class="auth" id="logoutBtns" style="display: none;">
+      <button id="logoutBtn">Logout</button>
+    </div>
   </header>
 
   <!-- Hero Section -->
@@ -31,12 +37,17 @@
     </ul>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Sakura Linux. All rights reserved.</p>
-  </footer>
+  <!-- Comment Section -->
+  <section class="comments">
+    <h2>Leave a Comment</h2>
+    <form id="commentForm">
+      <textarea id="commentInput" placeholder="Leave your thoughts here..."></textarea>
+      <button type="submit">Submit Comment</button>
+    </form>
+    <div id="commentsList"></div>
+  </section>
 
-  <!-- Sidebar (Hidden Initially) -->
+  <!-- Sidebar -->
   <div id="sidebar" class="sidebar">
     <h3>More Info</h3>
     <ul>
@@ -47,7 +58,24 @@
     </ul>
   </div>
 
-  <!-- Smooth Scroll and Scripts -->
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Sakura Linux. All rights reserved.</p>
+  </footer>
+
+  <!-- Modal for Sign In/Sign Up -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+      <h3 id="modalTitle">Sign In</h3>
+      <form id="modalForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit" id="submitBtn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
