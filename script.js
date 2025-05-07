@@ -1,79 +1,81 @@
-// Dark/Light Mode Toggle
-const toggle = document.getElementById("modeToggle");
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+let currentUser = null; // To store the current logged-in user
+
+// Open modal function
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = 'block';
+}
+
+// Close modal function
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
+// Handle Sign Up Form
+document.getElementById('signup-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('signup-username').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  
+  // Fake user registration (store in localStorage for simplicity)
+  localStorage.setItem('user', JSON.stringify({ username, email, password }));
+
+  alert('User successfully signed up!');
+  closeModal('sign-up-modal');
+  document.getElementById('signin-username').value = username; // Auto-fill username in sign-in form
 });
 
-// Sidebar Interaction - Pop-out when mouse is near the top-right corner
-const sidebar = document.getElementById("sidebar");
+// Handle Sign In Form
+document.getElementById('signin-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('signin-username').value;
+  const password = document.getElementById('signin-password').value;
+  
+  const user = JSON.parse(localStorage.getItem('user')); // Get stored user from localStorage
 
-document.body.addEventListener("mousemove", (event) => {
-  const x = event.clientX;
-  const y = event.clientY;
-
-  if (x > window.innerWidth - 20 && y < 20) {
-    sidebar.style.right = "0"; // Show sidebar
+  if (user && user.username === username && user.password === password) {
+    currentUser = user;
+    alert('You have successfully signed in!');
+    closeModal('sign-in-modal');
+    updateAuthUI(); // Update the UI after successful sign-in
   } else {
-    sidebar.style.right = "-300px"; // Hide sidebar
+    alert('Invalid username or password!');
   }
 });
 
-// Modal interaction for Sign In/Sign Up
-const signInBtn = document.getElementById("signInBtn");
-const signUpBtn = document.getElementById("signUpBtn");
-const modal = document.getElementById("modal");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const modalTitle = document.getElementById("modalTitle");
-const submitBtn = document.getElementById("submitBtn");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const authBtns = document.getElementById("authBtns");
-const logoutBtns = document.getElementById("logoutBtns");
-const logoutBtn = document.getElementById("logoutBtn");
+// Logout functionality
+function logout() {
+  currentUser = null;
+  updateAuthUI();
+}
 
-signInBtn.addEventListener("click", () => {
-  modal.style.display = "block";
-  modalTitle.textContent = "Sign In";
-  submitBtn.textContent = "Sign In";
-});
+// Update UI based on user login status
+function updateAuthUI() {
+  if (currentUser) {
+    document.getElementById('logout-btn').style.display = 'block';
+    document.querySelectorAll('.auth button').forEach(button => button.style.display = 'none');
+  } else {
+    document.getElementById('logout-btn').style.display = 'none';
+    document.querySelectorAll('.auth button').forEach(button => button.style.display = 'inline-block');
+  }
+}
 
-signUpBtn.addEventListener("click", () => {
-  modal.style.display = "block";
-  modalTitle.textContent = "Sign Up";
-  submitBtn.textContent = "Sign Up";
-});
-
-closeModalBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-submitBtn.addEventListener("click", (e) => {
+// Comment section functionality
+document.getElementById('comment-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  // Simulate login/signup
-  authBtns.style.display = "none";
-  logoutBtns.style.display = "block";
-  modal.style.display = "none";
-});
+  const commentText = document.getElementById('comment-text').value;
 
-logoutBtn.addEventListener("click", () => {
-  authBtns.style.display = "block";
-  logoutBtns.style.display = "none";
-});
-
-// Comment submission
-const commentForm = document.getElementById("commentForm");
-const commentInput = document.getElementById("commentInput");
-const commentsList = document.getElementById("commentsList");
-
-commentForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const commentText = commentInput.value.trim();
   if (commentText) {
-    const commentDiv = document.createElement("div");
-    commentDiv.classList.add("comment");
-    commentDiv.textContent = commentText;
-    commentsList.appendChild(commentDiv);
-    commentInput.value = ""; // Clear the textarea
+    const commentSection = document.getElementById('comment-section');
+    const comment = document.createElement('div');
+    comment.classList.add('comment');
+    comment.innerHTML = `<p>${commentText}</p>`;
+    commentSection.appendChild(comment);
+    document.getElementById('comment-text').value = ''; // Clear comment input
   }
+});
+
+// Initial UI update on page load
+document.addEventListener('DOMContentLoaded', () => {
+  updateAuthUI();
 });
