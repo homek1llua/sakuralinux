@@ -215,3 +215,82 @@ footer {
 body:hover #sidebar {
   right: 0;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .features li {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .navbar .logo {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .hero {
+    padding: 5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .download-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .features ul {
+    text-align: left;
+  }
+
+  .features li {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 8px 15px;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .features li {
+    font-size: 1rem;
+  }
+
+  .comments textarea {
+    width: 90%;
+  }
+
+  .comments button {
+    padding: 0.6rem 1.8rem;
+  }
+}
