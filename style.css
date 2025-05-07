@@ -36,7 +36,6 @@ body.dark {
   color: white;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   z-index: 100;
-  animation: slideDown 0.5s ease-out;
 }
 
 .auth button {
@@ -127,47 +126,13 @@ body.dark {
   background-color: #ff1493;
 }
 
-.sidebar {
-  position: fixed;
-  top: 50%;
-  right: -300px;
-  width: 300px;
-  height: 300px;
-  background: var(--accent);
-  padding: 1.5rem;
-  border-radius: 10px;
-  transition: right 0.3s ease-in-out;
-}
-
-.sidebar h3 {
-  color: white;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin: 10px 0;
-}
-
-.sidebar a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.sidebar a:hover {
-  text-decoration: underline;
-}
-
 footer {
   text-align: center;
   padding: 2rem;
   background-color: #ffc0cb33;
 }
 
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -207,30 +172,7 @@ footer {
   to {opacity: 1; transform: translateY(0);}
 }
 
-@keyframes slideDown {
-  from {opacity: 0; transform: translateY(-50px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-body:hover #sidebar {
-  right: 0;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 1200px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-  }
-
-  .features li {
-    font-size: 1.3rem;
-  }
-}
-
+/* Media Queries */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -251,10 +193,6 @@ body:hover #sidebar {
     font-size: 2.5rem;
   }
 
-  .hero p {
-    font-size: 1rem;
-  }
-
   .download-btn {
     padding: 1rem 1.5rem;
     font-size: 1rem;
@@ -265,7 +203,7 @@ body:hover #sidebar {
   }
 
   .features li {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 }
 
